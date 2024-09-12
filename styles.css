@@ -1,0 +1,33 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.4;
+    margin: 0;
+    padding: 0;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+header, nav, main, footer {
+    padding: 10px;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 10px;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(79, 107, 222); /* Set link color to light blue */
+}
+
+a:hover {
+    text-decoration: underline;
+    color: rgb(44, 82, 95); /* Change color on hover for a subtle effect */
+}

@@ -1,0 +1,36 @@
+William Campbell
+willj.campbell@yahoo.com ❖ (434) 981-6869 ❖ McLean, VA
+Objective
+I am a graduate of James Madison University with extensive coursework and experience applying statistical and
+quantitative analysis to learn from data. I have developed strong programming skills through academic projects
+focused on econometrics and forecasting, as well as personal projects with a focus on machine learning and web
+development. I am looking to start a career in advanced data analytics and operations research where I can
+contribute to solving business or economic problems.
+Technical Skills
+Languages: Python, R, HTML, CSS
+Libraries: Scikit-learn, Pandas, Matplotlib, Flask, Vars, Ggplot2, Forecast, Quantmod
+Developer Tools: Git, Jupyter Notebooks, RMarkdown
+Econometrics: Linear Regression, ARIMA, Exponential Smoothing, Trend Forecasting, Vector Autoregression
+Other Skills: Presenting results to technical and non-technical audiences, Data visualization, Excellent written
+communication, Customer service, Time management, Priority management, Self-teaching
+Education
+James Madison University August 2022 - August 2024
+B.S. Economics, Minor Mathematics Harrisonburg, VA
+▪ GPA: 3.90/4
+▪ Courses included: Econometrics, Applied Time Series Analysis, Calculus I-III, Linear Algebra w/Differential
+Equations, Advanced Macroeconomics, International Trade, International Finance, Introduction to
+Programming, Introduction to Data
+Experience
+Whole Foods Market March 2023 - August 2023
+Prepared Foods Team Member Charlottesville, VA
+▪ Provided customer service by assisting and serving customers in store, resolving or escalating issues, and
+answering phone calls to accept orders
+▪ Learned and participated in all venues as needed including dishwashing, deli service, pizzas, and hot and cold
+foods
+Projects
+ARIMA Auto Plot and Forecasting for BLS Data June 2024 - August 2024
+▪ Used R libraries and Bureau of Labor Statistics (BLS) API’s to create a pipeline to visualize and forecast any
+BLS series with one function
+▪ Automatically chooses the best ARIMA model to forecast future values, eliminating systematic bias in model
+development
+▪ Multi-panel functionality allows for easy and automated development of economic outlook dashboards

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaggle Project - William Campbell</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .project-content {
+            margin-bottom: 2rem;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .project-content iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+            margin-top: 1rem;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: rgb(79, 107, 222);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: rgb(44, 82, 95);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div style="text-align: center; margin: 20px;">
+        <a href="coding.html" class="btn">Return</a>
+    </div>
+    <main>
+        <div class="project-content">
+            <h2>A Kaggle Project</h2>
+            <p>This is a machine learning project I did on Kaggle to predict sale prices of houses. After cleaning and transforming the data I played with various models such as linear regression and random forests, and tried optimizing them a bit. After that I got mediocre results, so I made what I call a "kitchen sink" model. Basically, I threw everything into an XGBoost model, scaled the numerical features, one-hot encoded the categorical features, filled all missing values, and turned the knobs on the hyperparameters. Once I fit the model I got a score in the top 10%!</p>
+            <iframe src="https://www.kaggle.com/embed/willjcampbell/kitchensinkboost-xgboost?cellIds=5-7&kernelSessionId=191584912" frameborder="0" scrolling="auto" title="KitchenSinkBoost (XGBoost)"></iframe>
+        </div>
+    </main>
+
+</body>
+</html>
