@@ -36,3 +36,10 @@ img {
     max-width: 100%;
     height: auto;
 }
+
+img[src*="arima.gif"] {
+    width: 100%; /* Set the width of the GIF to 100% of its container */
+    max-width: 800px; /* Ensure it does not exceed the max width of the container */
+    display: block;
+    margin: 0 auto;
+}
