@@ -31,3 +31,8 @@ a:hover {
     text-decoration: underline;
     color: rgb(44, 82, 95); /* Change color on hover for a subtle effect */
 }
+
+img {
+    max-width: 100%;
+    height: auto;
+}
