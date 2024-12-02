@@ -43,3 +43,23 @@ img[src*="arima.gif"] {
     display: block;
     margin: 0 auto;
 }
+
+.preview-container {
+    position: relative;
+    display: inline-block;
+}
+
+.preview-image {
+    display: none;
+    position: absolute;
+    max-width: 300px; /* Adjust this value to control image size */
+    height: auto;
+    top: 100%;
+    left: 0;
+    z-index: 1;
+    margin-top: 5px;
+}
+
+.preview-container:hover .preview-image {
+    display: block;
+}
