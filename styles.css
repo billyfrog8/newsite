@@ -46,20 +46,13 @@ img[src*="arima.gif"] {
 
 .preview-container {
     position: relative;
-    display: inline-block;
+    display: block;
+    margin: 20px 0;
 }
 
 .preview-image {
-    display: none;
-    position: absolute;
-    max-width: 300px; /* Adjust this value to control image size */
-    height: auto;
-    top: 100%;
-    left: 0;
-    z-index: 1;
-    margin-top: 5px;
-}
-
-.preview-container:hover .preview-image {
     display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 10px 0;
 }
