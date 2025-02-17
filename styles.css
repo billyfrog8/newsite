@@ -43,3 +43,32 @@ img[src*="arima.gif"] {
     display: block;
     margin: 0 auto;
 }
+
+.hover-pizza {
+    color: rgb(79, 107, 222);
+    text-decoration: none;
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.hover-pizza:hover {
+    text-decoration: underline;
+    color: rgb(44, 82, 95);
+}
+
+.hover-pizza .pizza-image {
+    display: none;
+    position: absolute;
+    width: 400px !important;
+    height: auto !important;
+    z-index: 999;
+    top: 100%;
+    left: 0;
+    max-width: none !important;
+    border-radius: 70px;
+}
+
+.hover-pizza:hover .pizza-image {
+    display: block;
+}
