@@ -1,33 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>more | choosewill</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>more | choosewill</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .image-container {
+      width: 100%;
+      max-width: 800px;
+      /* Set a fixed height to control the cropping:
+         Assuming the original display height would be 400px,
+         cropping 15px from the top and 25px from the bottom gives 400 - 40 = 360px */
+      height: 360px;
+      overflow: hidden;
+      position: relative;
+      border-radius: 15px;
+      margin: 0 auto;
+      cursor: grab;
+    }
+
+    .zoom-image {
+      width: 100%;
+      /* Use auto height so the image scales proportionally */
+      height: auto;
+      object-fit: cover;
+      object-position: center top;
+      /* Shift up to crop 15px from the top */
+      margin-top: -15px;
+      transition: transform 0.3s ease-in-out;
+      position: absolute;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>More</h1>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/writing">Writing</a></li>
-            <li><a href="/coding">Projects</a></li>
-            <li><a href="/resume">Resume</a></li>
-            <li><a href="/more">More</a></li>
-        </ul>
-    </nav>
-    <main>
-        <h2>Can you beat ARIMA at forecasting time series?</h2>
-        <p>In my time series forecasting class I didn't exactly believe in the power of simple ARIMA models. I always thought I could simply draw a line and get about the same accuracy. Well it turns out 
-            ARIMA is often better than me, but more importantly in my opinion unbiased. I made a simple game using real stock price data to try to draw a line that would beat an autofitted ARIMA model at forecasting 
-            10 periods into the future.
-            <img src="arima.gif" alt="ARIMA forecasting game gif" style="width: 100%; max-width: 800px; display: block; margin: 0 auto; border-radius: 15px;">
-        </p>
-      <h2>Books I like</h2>
-        <p>I have a very strong preference for books that are old, challenging to read, esoteric, and which do not make sense the first (or even third) time I read them.
+  <header>
+    <h1>More</h1>
+  </header>
+  <nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/writing">Writing</a></li>
+      <li><a href="/coding">Projects</a></li>
+      <li><a href="/resume">Resume</a></li>
+      <li><a href="/more">More</a></li>
+    </ul>
+  </nav>
+  <main>
+    <h2>Can you beat ARIMA at forecasting time series?</h2>
+    <p>
+      In my time series forecasting class I didn't exactly believe in the power of simple ARIMA models. I always thought I could simply draw a line and get about the same accuracy. Well it turns out
+      ARIMA is often better than me, but more importantly in my opinion unbiased. I made a simple game using real stock price data to try to draw a line that would beat an autofitted ARIMA model at forecasting
+      10 periods into the future.
+      <img src="arima.gif" alt="ARIMA forecasting game gif" style="width: 100%; max-width: 800px; display: block; margin: 0 auto; border-radius: 15px;" />
+    </p>
+    <h2>My Bookshelf & Books I like</h2>
+
+    <div class="image-container" onmousemove="moveImage(event)" onmouseleave="resetImage()">
+      <img src="IMG_0321.jpg" alt="Book image" class="zoom-image" />
+    </div>
+
+    <script>
+      function moveImage(event) {
+        const container = event.currentTarget;
+        const img = container.querySelector('.zoom-image');
+        const rect = container.getBoundingClientRect();
+
+        // Calculate the mouse position as a percentage of the container
+        const offsetX = ((event.clientX - rect.left) / rect.width) * 100;
+        const offsetY = ((event.clientY - rect.top) / rect.height) * 100;
+
+        // Adjust the transform: zoom in (scale 2) and translate based on mouse position
+        img.style.transform = `scale(1.5) translate(${50 - offsetX}%, ${50 - offsetY}%)`;
+      }
+
+      function resetImage() {
+        const img = document.querySelector('.zoom-image');
+        img.style.transform = "scale(1) translate(0, 0)";
+      }
+    </script>
+    
+    
+            <p>I have a very strong preference for books that are old, challenging to read, esoteric, and which do not make sense the first (or even third) time I read them.
             What I enjoy most about reading is trying to understand what is happening in the author's head rather than what their words are saying. It is especially 
             hard to convey abstract ideas in writing so I believe that even with the best authors there is always deeper meaning or truth than what is evident. Here are some of my favorites:
         </p>
