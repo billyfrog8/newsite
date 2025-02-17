@@ -28,7 +28,7 @@
       object-position: center top;
       /* Shift up to crop 15px from the top */
       margin-top: -15px;
-      transition: transform 0.3s ease-in-out;
+      transition: transform 0.1s ease-out;
       position: absolute;
     }
   </style>
@@ -70,7 +70,7 @@
         const offsetX = ((event.clientX - rect.left) / rect.width) * 100;
         const offsetY = ((event.clientY - rect.top) / rect.height) * 100;
 
-        // Adjust the transform: zoom in (scale 2) and translate based on mouse position
+        // Adjust the transform: zoom in (scale 1.5) and translate based on mouse position
         img.style.transform = `scale(1.5) translate(${50 - offsetX}%, ${50 - offsetY}%)`;
       }
 
