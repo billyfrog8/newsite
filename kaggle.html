@@ -46,6 +46,21 @@
             <iframe src="https://www.kaggle.com/embed/willjcampbell/kitchensinkboost-xgboost?cellIds=5-7&kernelSessionId=191584912" frameborder="0" scrolling="auto" title="KitchenSinkBoost (XGBoost)"></iframe>
         </div>
     </main>
+<!-- Load the chatbot HTML dynamically -->
+<div id="chatbot-container"></div>
+
+<script>
+    fetch('chatbot.html')
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById('chatbot-container').innerHTML = html;
+        });
+</script>
+
+<!-- Link to chatbot JS -->
+<script src="chatbot.js"></script>
+
+
 
 </body>
 </html>

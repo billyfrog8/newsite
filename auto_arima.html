@@ -991,5 +991,20 @@ $(document).ready(function () {
 <div style="text-align: center; margin: 20px;">
     <a href="coding.html" class="btn btn-primary">Return</a>
 </div>
+<!-- Load the chatbot HTML dynamically -->
+<div id="chatbot-container"></div>
+
+<script>
+    fetch('chatbot.html')
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById('chatbot-container').innerHTML = html;
+        });
+</script>
+
+<!-- Link to chatbot JS -->
+<script src="chatbot.js"></script>
+
+
 </body>
 </html>
