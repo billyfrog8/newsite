@@ -34,6 +34,9 @@ function sendMessage() {
 
     const messages = document.getElementById('chatbot-messages');
     messages.innerHTML += `<p><strong>You:</strong> ${userInput}</p>`;
+    
+    // Remove auto-scroll
+    // messages.scrollTop = messages.scrollHeight;
 
     // Save messages to localStorage
     localStorage.setItem('chatbotMessages', messages.innerHTML);
@@ -41,21 +44,21 @@ function sendMessage() {
     // Clear input field
     document.getElementById('user-input').value = '';
 
-    // Send input, user ID, and message history to Flask backend
-    fetch('https://chatbot-for-website-ibuildwalls17.replit.app/ask', {  // Use localhost for local testing
+    fetch('https://chatbot-for-website-ibuildwalls17.replit.app/ask', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ user_input: userInput, user_id: userId })
     })
     .then(response => response.json())
     .then(data => {
-        const botResponse = data.response.replace(/\n/g, '<br>'); // Convert new lines to <br>
+        const botResponse = data.response.replace(/\n/g, '<br>');
         messages.innerHTML += `<p><strong>Bot:</strong> ${botResponse}</p>`;
+        
+        // Remove auto-scroll
+        // messages.scrollTop = messages.scrollHeight;
         
         // Save messages to localStorage
         localStorage.setItem('chatbotMessages', messages.innerHTML);
-
-        messages.scrollTop = messages.scrollHeight;
     });
 }
 
