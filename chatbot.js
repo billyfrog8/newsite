@@ -48,7 +48,6 @@ function loadMessages() {
 
         // Set the messages and scroll to bottom
         messagesContainer.innerHTML = messages;
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
 
     } catch (error) {
         console.error('Error loading messages:', error);
