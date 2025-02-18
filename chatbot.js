@@ -60,19 +60,34 @@ function sendMessage() {
     fetch('https://chatbot-for-website-ibuildwalls17.replit.app/ask', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ user_input: userInput, user_id: userId })
+        body: JSON.stringify({ 
+            user_input: userInput, 
+            user_id: userId,
+            max_length: 500 // Adjust as needed
+        })
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
     .then(data => {
+        if (data.error) {
+            throw new Error(data.error);
+        }
         const botResponse = data.response.replace(/\n/g, '<br>');
         messages.innerHTML += `<p><strong>Bot:</strong> ${botResponse}</p>`;
         
         // Save messages after bot response
         saveMessages(messages.innerHTML);
+        
+        // Scroll to bottom
+        messages.scrollTop = messages.scrollHeight;
     })
     .catch(error => {
         console.error('Error:', error);
-        messages.innerHTML += `<p><strong>Error:</strong> Failed to get response. Please try again.</p>`;
+        messages.innerHTML += `<p><strong>Error:</strong> ${error.message || 'Failed to get response. Please try again.'}</p>`;
         saveMessages(messages.innerHTML);
     });
 }
