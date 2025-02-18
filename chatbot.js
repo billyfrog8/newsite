@@ -13,9 +13,11 @@ function toggleChatbot() {
     if (chatbot.style.display === 'none' || chatbot.style.display === '') {
         chatbot.style.display = 'block';
         chatButton.style.display = 'none';
+        document.body.classList.add('chatbot-open'); // Prevent body scroll
     } else {
         chatbot.style.display = 'none';
         chatButton.style.display = 'block';
+        document.body.classList.remove('chatbot-open'); // Re-enable body scroll
     }
 }
 
