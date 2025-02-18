@@ -121,16 +121,16 @@
         }
     </style>
 </head>
-<body>
+<body onload="loadMessages()">
     <div id="chatbot-popup" class="chatbot-popup">
         <div class="chatbot-header">
-            <h3>Ask AI about Will!</h3>
+            <h3>Ask AI about me, my projects, or anything else!</h3>
             <button onclick="toggleChatbot()">X</button>
         </div>
         <div class="chatbot-body">
             <div id="chatbot-messages" class="chatbot-messages"></div>
             <div class="input-area">
-                <input type="text" id="user-input" placeholder="Ask me anything..." onkeydown="if(event.key === 'Enter'){ sendMessage(); }">
+                <input type="text" id="user-input" placeholder="Explain Will's BLS project" onkeydown="if(event.key === 'Enter'){ sendMessage(); }">
                 <button onclick="sendMessage()">Send</button>
             </div>
         </div>
@@ -164,6 +164,13 @@
                 
                 // Scroll to bottom of messages
                 messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            }
+        }
+
+        function loadMessages() {
+            const messages = localStorage.getItem('chatbotMessages');
+            if (messages) {
+                document.getElementById('chatbot-messages').innerHTML = messages;
             }
         }
     </script>

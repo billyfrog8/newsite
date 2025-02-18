@@ -19,6 +19,14 @@ function toggleChatbot() {
     }
 }
 
+// Load messages from localStorage
+function loadMessages() {
+    const messages = localStorage.getItem('chatbotMessages');
+    if (messages) {
+        document.getElementById('chatbot-messages').innerHTML = messages;
+    }
+}
+
 // Send message to Flask and get a response
 function sendMessage() {
     const userInput = document.getElementById('user-input').value;
@@ -26,6 +34,9 @@ function sendMessage() {
 
     const messages = document.getElementById('chatbot-messages');
     messages.innerHTML += `<p><strong>You:</strong> ${userInput}</p>`;
+
+    // Save messages to localStorage
+    localStorage.setItem('chatbotMessages', messages.innerHTML);
 
     // Clear input field
     document.getElementById('user-input').value = '';
@@ -40,7 +51,13 @@ function sendMessage() {
     .then(data => {
         const botResponse = data.response.replace(/\n/g, '<br>'); // Convert new lines to <br>
         messages.innerHTML += `<p><strong>Bot:</strong> ${botResponse}</p>`;
+        
+        // Save messages to localStorage
+        localStorage.setItem('chatbotMessages', messages.innerHTML);
+
         messages.scrollTop = messages.scrollHeight;
     });
-    
 }
+
+// Call loadMessages when the page loads
+window.onload = loadMessages;
