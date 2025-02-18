@@ -21,11 +21,25 @@ function toggleChatbot() {
     }
 }
 
-// Load messages from localStorage
+// Function to load messages with error handling
 function loadMessages() {
-    const messages = localStorage.getItem('chatbotMessages');
-    if (messages) {
-        document.getElementById('chatbot-messages').innerHTML = messages;
+    try {
+        const messages = localStorage.getItem('chatbotMessages');
+        const messagesContainer = document.getElementById('chatbot-messages');
+        if (messages && messagesContainer) {
+            messagesContainer.innerHTML = messages;
+        }
+    } catch (error) {
+        console.error('Error loading messages:', error);
+    }
+}
+
+// Function to save messages with error handling
+function saveMessages(messagesHTML) {
+    try {
+        localStorage.setItem('chatbotMessages', messagesHTML);
+    } catch (error) {
+        console.error('Error saving messages:', error);
     }
 }
 
@@ -37,11 +51,8 @@ function sendMessage() {
     const messages = document.getElementById('chatbot-messages');
     messages.innerHTML += `<p><strong>You:</strong> ${userInput}</p>`;
     
-    // Remove auto-scroll
-    // messages.scrollTop = messages.scrollHeight;
-
-    // Save messages to localStorage
-    localStorage.setItem('chatbotMessages', messages.innerHTML);
+    // Save messages immediately after user input
+    saveMessages(messages.innerHTML);
 
     // Clear input field
     document.getElementById('user-input').value = '';
@@ -56,13 +67,18 @@ function sendMessage() {
         const botResponse = data.response.replace(/\n/g, '<br>');
         messages.innerHTML += `<p><strong>Bot:</strong> ${botResponse}</p>`;
         
-        // Remove auto-scroll
-        // messages.scrollTop = messages.scrollHeight;
-        
-        // Save messages to localStorage
-        localStorage.setItem('chatbotMessages', messages.innerHTML);
+        // Save messages after bot response
+        saveMessages(messages.innerHTML);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        messages.innerHTML += `<p><strong>Error:</strong> Failed to get response. Please try again.</p>`;
+        saveMessages(messages.innerHTML);
     });
 }
 
-// Call loadMessages when the page loads
+// Add event listener for page load
+document.addEventListener('DOMContentLoaded', loadMessages);
+
+// Backup load for browsers that might not trigger DOMContentLoaded
 window.onload = loadMessages;
