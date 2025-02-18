@@ -26,11 +26,34 @@ function loadMessages() {
     try {
         const messages = localStorage.getItem('chatbotMessages');
         const messagesContainer = document.getElementById('chatbot-messages');
-        if (messages && messagesContainer) {
-            messagesContainer.innerHTML = messages;
+        
+        // Check if container exists
+        if (!messagesContainer) {
+            console.error('Messages container not found');
+            return;
         }
+
+        // Only clear if there's no stored messages
+        if (!messages) {
+            messagesContainer.innerHTML = '';
+            return;
+        }
+
+        // Validate stored messages
+        if (messages === "[object Object]" || messages === "null" || messages === "undefined") {
+            localStorage.removeItem('chatbotMessages');
+            messagesContainer.innerHTML = '';
+            return;
+        }
+
+        // Set the messages and scroll to bottom
+        messagesContainer.innerHTML = messages;
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
     } catch (error) {
         console.error('Error loading messages:', error);
+        // Clear potentially corrupted data
+        localStorage.removeItem('chatbotMessages');
     }
 }
 
@@ -92,8 +115,7 @@ function sendMessage() {
     });
 }
 
-// Add event listener for page load
+// Add these event listeners to ensure messages load on all page changes
 document.addEventListener('DOMContentLoaded', loadMessages);
-
-// Backup load for browsers that might not trigger DOMContentLoaded
-window.onload = loadMessages;
+window.addEventListener('load', loadMessages);
+window.addEventListener('pageshow', loadMessages); // Handles back/forward cache

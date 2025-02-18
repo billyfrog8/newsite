@@ -176,42 +176,6 @@
     </div>
     <button id="open-chatbot-btn" onclick="toggleChatbot()">Ask AI about Will</button>
 
-    <script>
-        let isChatbotOpen = false;
-
-        function toggleChatbot() {
-            const chatbot = document.getElementById('chatbot-popup');
-            isChatbotOpen = !isChatbotOpen;
-            chatbot.style.display = isChatbotOpen ? 'block' : 'none';
-            if (isChatbotOpen) {
-                document.getElementById('user-input').focus();
-            }
-        }
-
-        function sendMessage() {
-            const input = document.getElementById('user-input');
-            const message = input.value.trim();
-            
-            if (message) {
-                const messagesDiv = document.getElementById('chatbot-messages');
-                const messageElement = document.createElement('p');
-                messageElement.textContent = message;
-                messagesDiv.appendChild(messageElement);
-                
-                // Clear input
-                input.value = '';
-                
-                // Scroll to bottom of messages
-                messagesDiv.scrollTop = messagesDiv.scrollHeight;
-            }
-        }
-
-        function loadMessages() {
-            const messages = localStorage.getItem('chatbotMessages');
-            if (messages) {
-                document.getElementById('chatbot-messages').innerHTML = messages;
-            }
-        }
-    </script>
+    <script src="chatbot.js"></script>
 </body>
 </html>
