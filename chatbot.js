@@ -76,6 +76,11 @@ function sendMessage() {
     // Save messages immediately after user input
     saveMessages(messages.innerHTML);
 
+    const lastMessage = messages.lastElementChild;
+    if (lastMessage) {
+        messages.scrollTop = lastMessage.offsetTop;
+    }
+
     // Clear input field
     document.getElementById('user-input').value = '';
 
@@ -105,7 +110,6 @@ function sendMessage() {
         saveMessages(messages.innerHTML);
         
         // Scroll to bottom
-        messages.scrollTop = messages.scrollHeight;
     })
     .catch(error => {
         console.error('Error:', error);
