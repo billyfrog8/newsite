@@ -22,94 +22,36 @@ function toggleChatbot() {
 }
 
 // Function to load messages with error handling
-function sendMessage() {
-    const userInput = document.getElementById('user-input').value;
-    if (!userInput.trim()) return;
-
-    const messages = document.getElementById('chatbot-messages');
-    
-    // Insert at the beginning instead of appending
-    const newMessage = document.createElement('p');
-    newMessage.innerHTML = `<strong>You:</strong> ${userInput}`;
-    messages.insertBefore(newMessage, messages.firstChild);
-    
-    // Save messages immediately after user input
-    saveMessages(messages.innerHTML);
-
-    // Clear input field
-    document.getElementById('user-input').value = '';
-
-    fetch('https://chatbot-for-website-ibuildwalls17.replit.app/ask', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-            user_input: userInput, 
-            user_id: userId,
-            max_length: 500
-        })
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        if (data.error) {
-            throw new Error(data.error);
-        }
-        const botResponse = data.response.replace(/\n/g, '<br>');
-        
-        // Insert bot response at the beginning as well
-        const botMessage = document.createElement('p');
-        botMessage.innerHTML = `<strong>Bot:</strong> ${botResponse}`;
-        messages.insertBefore(botMessage, messages.firstChild);
-        
-        // Save messages after bot response
-        saveMessages(messages.innerHTML);
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        const errorMessage = document.createElement('p');
-        errorMessage.innerHTML = `<strong>Error:</strong> ${error.message || 'Failed to get response. Please try again.'}`;
-        messages.insertBefore(errorMessage, messages.firstChild);
-        saveMessages(messages.innerHTML);
-    });
-}
-
-// Update the loadMessages function to handle the new structure
 function loadMessages() {
     try {
         const messages = localStorage.getItem('chatbotMessages');
         const messagesContainer = document.getElementById('chatbot-messages');
         
+        // Check if container exists
         if (!messagesContainer) {
             console.error('Messages container not found');
             return;
         }
 
+        // Only clear if there's no stored messages
         if (!messages) {
             messagesContainer.innerHTML = '';
             return;
         }
 
+        // Validate stored messages
         if (messages === "[object Object]" || messages === "null" || messages === "undefined") {
             localStorage.removeItem('chatbotMessages');
             messagesContainer.innerHTML = '';
             return;
         }
 
-        // Convert the stored HTML string to DOM elements and reverse their order
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = messages;
-        const messageElements = Array.from(tempDiv.children);
-        messagesContainer.innerHTML = '';
-        messageElements.reverse().forEach(element => {
-            messagesContainer.appendChild(element);
-        });
+        // Set the messages and scroll to bottom
+        messagesContainer.innerHTML = messages;
 
     } catch (error) {
         console.error('Error loading messages:', error);
+        // Clear potentially corrupted data
         localStorage.removeItem('chatbotMessages');
     }
 }
@@ -123,6 +65,58 @@ function saveMessages(messagesHTML) {
     }
 }
 
+// Send message to Flask and get a response
+function sendMessage() {
+    const userInput = document.getElementById('user-input').value;
+    if (!userInput.trim()) return;
+
+    const messages = document.getElementById('chatbot-messages');
+    messages.innerHTML += `<p><strong>You:</strong> ${userInput}</p>`;
+    
+    // Save messages immediately after user input
+    saveMessages(messages.innerHTML);
+
+    const lastMessage = messages.lastElementChild;
+    if (lastMessage) {
+        messages.scrollTop = lastMessage.offsetTop;
+    }
+
+    // Clear input field
+    document.getElementById('user-input').value = '';
+
+    fetch('https://chatbot-for-website-ibuildwalls17.replit.app/ask', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+            user_input: userInput, 
+            user_id: userId,
+            max_length: 500 // Adjust as needed
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.error) {
+            throw new Error(data.error);
+        }
+        const botResponse = data.response.replace(/\n/g, '<br>');
+        messages.innerHTML += `<p><strong>Bot:</strong> ${botResponse}</p>`;
+        
+        // Save messages after bot response
+        saveMessages(messages.innerHTML);
+        
+        // Scroll to bottom
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        messages.innerHTML += `<p><strong>Error:</strong> ${error.message || 'Failed to get response. Please try again.'}</p>`;
+        saveMessages(messages.innerHTML);
+    });
+}
 
 // Add these event listeners to ensure messages load on all page changes
 document.addEventListener('DOMContentLoaded', loadMessages);
