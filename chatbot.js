@@ -118,12 +118,6 @@ function sendMessage() {
     });
 }
 
-// Add this function to your existing JavaScript
-function setSuggestion(text) {
-    const inputField = document.getElementById('user-input');
-    inputField.value = text;
-    inputField.focus();
-}
 
 // Add these event listeners to ensure messages load on all page changes
 document.addEventListener('DOMContentLoaded', loadMessages);

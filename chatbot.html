@@ -88,7 +88,7 @@
         .chatbot-body {
             display: flex;
             flex-direction: column;
-            height: calc(100% - 120px); /* Adjusted to accommodate suggestions */
+            height: calc(100% - 60px);
             padding: 0;
         }
 
@@ -159,31 +159,6 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             height: auto;
         }
-
-        /* Added styles for suggestion chips */
-        .suggestion-chips {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            padding: 16px;
-            background: #f8f9fa;
-        }
-
-        .suggestion-chip {
-            padding: 8px 16px;
-            background-color: #e3f2fd;
-            color: #1976D2;
-            border: none;
-            border-radius: 16px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: background-color 0.2s;
-            white-space: nowrap;
-        }
-
-        .suggestion-chip:hover {
-            background-color: #bbdefb;
-        }
     </style>
 </head>
 <body>
@@ -192,15 +167,10 @@
             <h3>Ask AI about me, my projects, or anything else!</h3>
             <button onclick="toggleChatbot()">X</button>
         </div>
-        <div class="suggestion-chips">
-            <button class="suggestion-chip" onclick="setSuggestion('Explain Will\'s BLS project')">Explain Will's BLS project</button>
-            <button class="suggestion-chip" onclick="setSuggestion('What do Will\'s books say about him?')">What do Will's books say about him</button>
-            <button class="suggestion-chip" onclick="setSuggestion('Is Will a good fit for')">Is Will a good fit for</button>
-        </div>
         <div class="chatbot-body">
             <div id="chatbot-messages" class="chatbot-messages"></div>
             <div class="input-area">
-                <input type="text" id="user-input" placeholder="Ask me anything about Will!" onkeydown="if(event.key === 'Enter'){ sendMessage(); }">
+                <input type="text" id="user-input" placeholder="Explain Will's BLS project" onkeydown="if(event.key === 'Enter'){ sendMessage(); }">
                 <button onclick="sendMessage()">Send</button>
             </div>
         </div>
