@@ -65,7 +65,6 @@ function saveMessages(messagesHTML) {
     }
 }
 
-// Send message to Flask and get a response
 function sendMessage() {
     const userInput = document.getElementById('user-input').value;
     if (!userInput.trim()) return;
@@ -76,10 +75,8 @@ function sendMessage() {
     // Save messages immediately after user input
     saveMessages(messages.innerHTML);
 
-    const lastMessage = messages.lastElementChild;
-    if (lastMessage) {
-        messages.scrollTop = lastMessage.offsetTop;
-    }
+    // Scroll to top after user sends message
+    messages.scrollTop = 0;
 
     // Clear input field
     document.getElementById('user-input').value = '';
@@ -109,7 +106,7 @@ function sendMessage() {
         // Save messages after bot response
         saveMessages(messages.innerHTML);
         
-        // Scroll to bottom
+        // No scrolling after bot response
     })
     .catch(error => {
         console.error('Error:', error);
